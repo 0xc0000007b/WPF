@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:WpfApp2"
+        xmlns:vm="clr-namespace:WpfApp2.ViewModels"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="1"
+        Height="450"
+        Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <TextBlock 
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10 45 10 0"
+            Width="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Height="20">
+            
+        </TextBlock>
+        <TextBox Margin="10 70 10 0"
+                 Width="120"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Height="20" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <Button 
+            Width="30"
+            Height="25"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+                Margin="20 15 0 0" 
+            Content="exit" Command="{Binding ExitCommand}" /> 
+    </Grid>
+</Window>
