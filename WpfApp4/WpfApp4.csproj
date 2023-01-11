@@ -7,4 +7,20 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Data" />
+      <Folder Include="Infrastructure" />
+      <Folder Include="Model" />
+      <Folder Include="Services" />
+      <Folder Include="ViewModel" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="View\Windows\MainWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
 </Project>
