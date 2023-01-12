@@ -16,11 +16,10 @@ public class MainWindowViewModel : ViewModelBase
         get => _name; 
         set => SetField(ref _name, value);
     }
+    
+    private string _status = "Loading...";
 
-
-    private int _status;
-
-    public int Status
+    public string Status
     {
         get => _status; 
         set => SetField(ref _status, value);

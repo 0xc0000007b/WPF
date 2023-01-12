@@ -12,30 +12,156 @@
         Title="1"
         Height="450"
         Width="800">
+    <Window.Resources>
+          <Style x:Key="SliderThumbStyle" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="false"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse Stroke="#9b59b6"
+                          StrokeThickness="1"
+                          Name="Ellipse" 
+                          Fill="#9b59b6" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Ellipse" Property="Fill" Value="Orange"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Ellipse" Property="Fill" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border  BorderThickness="1" BorderBrush="Black" Background="Black" Height="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border SnapsToDevicePixels="True" Background="Green"  BorderThickness="1" BorderBrush="YellowGreen" Height="3"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Ellipse Height="10" Width="10" Fill="Green"></Ellipse>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Slider"  TargetType="Slider">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Track Grid.Row="1" x:Name="PART_Track"   >
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource SliderThumb}"  />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>            
+    </ControlTemplate>
+
+    <Style x:Key="Horizontal_Slider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="MinWidth" Value="104" />
+                <Setter Property="Template" Value="{StaticResource Slider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</Window.Resources>
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBlock 
-            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-            Margin="10 45 10 0"
-            Width="120"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Height="20">
-            
-        </TextBlock>
-        <TextBox Margin="10 70 10 0"
-                 Width="120"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Height="20" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button 
-            Width="30"
-            Height="25"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-                Margin="20 15 0 0" 
-            Content="exit" Command="{Binding ExitCommand}" /> 
-    </Grid>
+    <DockPanel>
+        <Menu  DockPanel.Dock="Top">
+            <MenuItem   Header="File">
+               
+                <MenuItem Command="{Binding ExitCommand}" Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="About"/>
+            <MenuItem Header="Help" />
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                
+                <TextBlock Text="{Binding Status}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                
+            <ProgressBar Value="{Binding Name}" Width="120" Height="15" Margin="10 0 0 0">
+                <ProgressBar.Style>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Foreground" Value="#2980b9"/>
+                    </Style>
+                </ProgressBar.Style>
+            </ProgressBar >
+            </StatusBarItem>
+            <StatusBarItem>
+                
+                <Slider Width="120" Margin="5 0 0 0" Value="{Binding Name}" 
+                        Style="{StaticResource Horizontal_Slider}"/>
+            </StatusBarItem>
+
+        </StatusBar>
+        <TabControl>
+            <TabItem Width="120" Header="Test">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="63"/>
+                        <RowDefinition Height="325"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="157"/>
+                        <ColumnDefinition Width="653"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="Brown" Stroke="Aqua" StrokeThickness="2" RadiusX="3" RadiusY="2"/>
+                    <GridSplitter Grid.RowSpan="2" HorizontalAlignment="Right" Width="4"/>
+                </Grid>
+            </TabItem>
+              
+            <TabItem  Width="120" Header="Test 1"/>
+        </TabControl>
+    </DockPanel>
 </Window>

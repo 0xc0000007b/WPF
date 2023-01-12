@@ -10,8 +10,9 @@ public class Command : CommandBase
 
     public Command(Action<object> Execute, Func<object, bool> CanExecute = null)
     {
-        _execute = Execute;
+        _execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
         _canExecute = CanExecute;
+        
     }
 
     public override bool CanExecute(object? parameter = null) => _canExecute?.Invoke(parameter) ?? true;
