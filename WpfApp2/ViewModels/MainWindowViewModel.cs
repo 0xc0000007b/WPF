@@ -7,6 +7,8 @@ namespace WpfApp2.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    #region ViewProperties
+
     private string _name;
 
     public string Name
@@ -14,10 +16,19 @@ public class MainWindowViewModel : ViewModelBase
         get => _name; 
         set => SetField(ref _name, value);
     }
-    public MainWindowViewModel()
+
+
+    private int _status;
+
+    public int Status
     {
-        ExitCommand = new Command(OnExitCommand,CanExitCommand);
+        get => _status; 
+        set => SetField(ref _status, value);
     }
+    
+    #endregion
+
+    #region Commands
 
     public ICommand ExitCommand { get; }
 
@@ -27,4 +38,10 @@ public class MainWindowViewModel : ViewModelBase
     }
 
     private bool CanExitCommand(object e) => true;
+
+    #endregion
+    public MainWindowViewModel()
+    {
+        ExitCommand = new Command(OnExitCommand,CanExitCommand);
+    }
 }
