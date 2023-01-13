@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace WpfApp2.Infrastructure.Commands.Commands;
+namespace WpfApp2.Infrastructure.Commands;
 
 public class ExitCommand : Command
 {

@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:WpfApp2"
+        xmlns:cmd="clr-namespace:WpfApp2.Infrastructure.Commands"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WpfApp2.ViewModels"
+       
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -118,7 +121,7 @@
         <Menu  DockPanel.Dock="Top">
             <MenuItem   Header="File">
                
-                <MenuItem Command="{Binding ExitCommand}" Header="Exit"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
             </MenuItem>
             <MenuItem Header="About"/>
             <MenuItem Header="Help" />
@@ -146,7 +149,14 @@
 
         </StatusBar>
         <TabControl>
-            <TabItem Width="120" Header="Test">
+            <TabItem Width="120">
+                <TabItem.Header >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome  Margin="0 0 10 0" Height="12" Width="12"  Icon="Regular_ChartBar"/>
+                        <TextBlock Text="covid graphic"/>
+                    </StackPanel>
+                    
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="63"/>
@@ -156,7 +166,7 @@
                         <ColumnDefinition Width="157"/>
                         <ColumnDefinition Width="653"/>
                     </Grid.ColumnDefinitions>
-                    <Rectangle Fill="Brown" Stroke="Aqua" StrokeThickness="2" RadiusX="3" RadiusY="2"/>
+                   
                     <GridSplitter Grid.RowSpan="2" HorizontalAlignment="Right" Width="4"/>
                 </Grid>
             </TabItem>

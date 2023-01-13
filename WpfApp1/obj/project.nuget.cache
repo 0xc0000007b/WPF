@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "l98aNH7GCYSuM4eY96ZOTcQn/2FYMhfUmwcWG8LeOk1MErlqy/YOLN+zVhljohWHF46zYNeMyEM8O/WpwzW7ew==",
+  "dgSpecHash": "S6efTVxWjBXHj60vx/1UrZ7F/xHvyE+A/2SdJYmGZOPeZCyQsJO4OUeRI+B4+X83OMUNaSsk1xLbb0viaU/VPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hackerman\\Desktop\\wpf\\WpfApp4\\WpfApp1\\WpfApp1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Hackerman\\.nuget\\packages\\fontawesome5\\2.1.11\\fontawesome5.2.1.11.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\materialdesigncolors\\2.1.0\\materialdesigncolors.2.1.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\materialdesignthemes\\4.7.0\\materialdesignthemes.4.7.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
   "logs": []
 }

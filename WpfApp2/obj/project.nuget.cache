@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1/dnj2q+yrxkKqunpu9iPWxsRP20lwUri08f6nVHdfjPiYm795PeyINEm04SPJFYKoy46Z6KRZ8QS9LEDLVLxA==",
+  "dgSpecHash": "cnA1HQLFbqpPCVjb4zkSxQXGOXMsJI5Z6imkaftlYcjfAT4F+gmM37ZB4uX0W3Rl5MYqalQ3sVw9LsQ23UOAsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hackerman\\Desktop\\wpf\\WpfApp4\\WpfApp2\\WpfApp2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Hackerman\\.nuget\\packages\\fontawesome5\\2.1.11\\fontawesome5.2.1.11.nupkg.sha512"
+  ],
   "logs": []
 }

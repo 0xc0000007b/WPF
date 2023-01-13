@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Button Width="120"></Button>
+        <Menu>
+            <MenuItem Header="1"></MenuItem>
+            <MenuItem Header="1"></MenuItem>
+            <MenuItem Header="1"></MenuItem>
+            <MenuItem Header="1"></MenuItem>
+        </Menu>
+        <TabControl>
+            <TabItem Header="22"></TabItem>
+        </TabControl>
+       
     </Grid>
 </Window>
