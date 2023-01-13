@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:WpfApp2"
+        xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:cmd="clr-namespace:WpfApp2.Infrastructure.Commands"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WpfApp2.ViewModels"
@@ -152,21 +153,40 @@
             <TabItem Width="120">
                 <TabItem.Header >
                     <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome  Margin="0 0 10 0" Height="12" Width="12"  Icon="Regular_ChartBar"/>
-                        <TextBlock Text="covid graphic"/>
+                        <fa:ImageAwesome  Margin="0 0 10 0" Height="30" Width="30"  Icon="Regular_ChartBar">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="fa:ImageAwesome">
+                                    <Setter Property="Foreground" Value="#9b59b6"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#8e44ad"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
+                       
                     </StackPanel>
                     
                 </TabItem.Header>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="63"/>
-                        <RowDefinition Height="325"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="157"/>
-                        <ColumnDefinition Width="653"/>
-                    </Grid.ColumnDefinitions>
-                   
+                    
+                   <oxy:Plot>
+                      
+                       <oxy:Plot.Axes>
+                           <oxy:LinearAxis Position="Left"/>
+                           <oxy:LinearAxis Position="Bottom"/>
+                       </oxy:Plot.Axes>
+                       <oxy:Plot.Series >
+                           <oxy:LineSeries Color="#9b59b6"
+                                           ItemsSource="{Binding TestData}"
+                                           DataFieldX="XValue" 
+                                           DataFieldY="YValue">
+                             
+                                   
+                           </oxy:LineSeries>
+                       </oxy:Plot.Series>
+                   </oxy:Plot>
                     <GridSplitter Grid.RowSpan="2" HorizontalAlignment="Right" Width="4"/>
                 </Grid>
             </TabItem>
