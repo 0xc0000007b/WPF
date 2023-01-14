@@ -14,6 +14,7 @@ public class Students
     public DateTime Birthday { get; set; }
 
     public double Rating { get; set; }
+    public string Description { get; set; }
 }
 
 public class Group

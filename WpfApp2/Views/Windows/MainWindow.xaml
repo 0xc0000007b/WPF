@@ -8,6 +8,7 @@
         xmlns:cmd="clr-namespace:WpfApp2.Infrastructure.Commands"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WpfApp2.ViewModels"
+        xmlns:m="clr-namespace:WpfApp2.Models"
        
         mc:Ignorable="d"
         ResizeMode="NoResize"
@@ -17,7 +18,7 @@
         Height="450"
         Width="800">
     <Window.Resources>
-          <Style x:Key="SliderThumbStyle" TargetType="Thumb">
+        <Style x:Key="SliderThumbStyle" TargetType="Thumb">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="false"/>
         <Setter Property="Height" Value="18"/>
@@ -42,64 +43,64 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
-        <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="IsTabStop" Value="false" />
-        <Setter Property="Focusable" Value="false" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RepeatButton">
-                    <Border  BorderThickness="1" BorderBrush="Black" Background="Black" Height="3"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="1" BorderBrush="Black" Background="Black" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
-        <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RepeatButton">
-                    <Border SnapsToDevicePixels="True" Background="Green"  BorderThickness="1" BorderBrush="YellowGreen" Height="3"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="Green"  BorderThickness="1" BorderBrush="YellowGreen" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    <Style x:Key="SliderThumb" TargetType="Thumb">
-        <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Thumb">
-                    <Ellipse Height="10" Width="10" Fill="Green"></Ellipse>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse Height="10" Width="10" Fill="Green"></Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    <ControlTemplate x:Key="Slider"  TargetType="Slider">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Track Grid.Row="1" x:Name="PART_Track"   >
-                <Track.DecreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
-                </Track.DecreaseRepeatButton>
-                <Track.Thumb>
-                    <Thumb Style="{StaticResource SliderThumb}"  />
-                </Track.Thumb>
-                <Track.IncreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
-                </Track.IncreaseRepeatButton>
-            </Track>
-        </Grid>            
-    </ControlTemplate>
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>            
+        </ControlTemplate>
 
     <Style x:Key="Horizontal_Slider" TargetType="Slider">
         <Setter Property="Focusable" Value="False"/>
@@ -113,6 +114,14 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+        <Style TargetType="fa:ImageAwesome" x:Key="FaStyle">
+            <Setter Property="Foreground" Value="#9b59b6"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#8e40aa"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 </Window.Resources>
     
     <Window.DataContext>
@@ -122,14 +131,22 @@
         <Menu  DockPanel.Dock="Top">
             <MenuItem   Header="File">
                
-                <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
+                <MenuItem Command="{Binding ExitCommand}">
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Width="13" Height="13" Margin="0 0 10 0" Style="{StaticResource FaStyle}" Icon="Solid_FireExtinguisher"/>
+                            <TextBlock Text="Exit"></TextBlock>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="About"/>
             <MenuItem Header="Help" />
             <MenuItem Command="{Binding ChangeTabIndex}" CommandParameter="-1">
                 <MenuItem.Header>
                     <StackPanel>
-                        <fa:ImageAwesome Width="10" Icon="Solid_ArrowLeft"></fa:ImageAwesome>
+                        <fa:ImageAwesome Style="{StaticResource FaStyle}" Width="10" Icon="Solid_ArrowLeft"></fa:ImageAwesome>
                       
                     </StackPanel>
                 </MenuItem.Header>
@@ -137,8 +154,8 @@
             <MenuItem Command="{Binding ChangeTabIndex}" CommandParameter="+1">
                 <MenuItem.Header >
                     <StackPanel>
-                        <fa:ImageAwesome Width="10" Icon="Solid_ArrowRight"></fa:ImageAwesome>
-                      
+                        <fa:ImageAwesome Width="10" Icon="Solid_ArrowRight" Style="{StaticResource FaStyle}"></fa:ImageAwesome>
+                        
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
@@ -170,27 +187,15 @@
             <TabItem Width="120">
                 <TabItem.Header >
                     <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome  Margin="0 0 10 0" Height="30" Width="30"  Icon="Regular_ChartBar">
-                            <fa:ImageAwesome.Style>
-                                <Style TargetType="fa:ImageAwesome">
-                                    <Setter Property="Foreground" Value="#9b59b6"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Foreground" Value="#8e44ad"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </fa:ImageAwesome.Style>
-                        </fa:ImageAwesome>
-                       
+                        <fa:ImageAwesome 
+                            Style="{StaticResource FaStyle}" 
+                            Margin="0 0 10 0" Height="30" 
+                            Width="30"  Icon="Regular_ChartBar"/>
                     </StackPanel>
-                    
                 </TabItem.Header>
                 <Grid>
-                    
-                   <oxy:Plot>
-                      
-                       <oxy:Plot.Axes>
+                    <oxy:Plot>
+                        <oxy:Plot.Axes>
                            <oxy:LinearAxis Position="Left"/>
                            <oxy:LinearAxis Position="Bottom"/>
                        </oxy:Plot.Axes>
@@ -199,8 +204,6 @@
                                            ItemsSource="{Binding TestData}"
                                            DataFieldX="XValue" 
                                            DataFieldY="YValue">
-                             
-                                   
                            </oxy:LineSeries>
                        </oxy:Plot.Series>
                    </oxy:Plot>
@@ -208,7 +211,57 @@
                 </Grid>
             </TabItem>
               
-            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome
+                            Icon="Regular_User" 
+                            Width="30" Height="30" 
+                            Margin="0 0 10 0" 
+                            Style="{StaticResource FaStyle}"/>
+                        <TextBlock Text="{Binding SelectedGroup.Name, FallbackValue='Students', 
+                        TargetNullValue='Group is not selected or null'}" Margin="0 10 0 10"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Groups">
+                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedGroup}"/>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, StringFormat='Students of group {0}', FallbackValue='Students', TargetNullValue='Students'}">
+                        <DataGrid 
+                            ItemsSource="{Binding SelectedGroup.StudentsCount}" 
+                            AutoGenerateColumns="False" 
+                            IsReadOnly="True"
+                            HorizontalGridLinesBrush="#9b59b6"
+                            VerticalGridLinesBrush="{x:Null}"
+                            AlternatingRowBackground="#8e44ad">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Surname" IsReadOnly="True" Binding="{Binding Surname}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic}"/>
+                                <!-- <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/> -->
+                                <DataGridTemplateColumn Header="Birthday">
+                                  <DataGridTemplateColumn.CellTemplate>
+                                      <DataTemplate DataType="{x:Type m:Students}">
+                                         <DatePicker SelectedDate="{Binding Birthday}"/>
+                                         
+                                         
+                                      </DataTemplate>
+                                  </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" />
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                                <!-- <DataGridTextColumn Header="Group" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/> -->
+                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem  Width="120" Header="Test 1"/>
             <TabItem  Width="120" Header="Test 1"/>
             <TabItem  Width="120" Header="Test 1"/>

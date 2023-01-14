@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using OxyPlot;
@@ -24,6 +26,7 @@ public class MainWindowViewModel : ViewModelBase
     }
 
     #endregion
+    
     #region ViewProperties
 
     
@@ -45,8 +48,25 @@ public class MainWindowViewModel : ViewModelBase
     }
     
     #endregion
-    
-    
+
+    #region GrupCollection
+
+    public ObservableCollection<Group> Groups { get; set; }
+
+    #region Gruop Selection
+
+    private Group _selectedGroup;
+
+    public Group SelectedGroup
+    {
+        get => _selectedGroup;
+
+        set => SetField(ref _selectedGroup, value);
+    }
+
+    #endregion
+
+    #endregion
 
     #region Commands
 
@@ -85,8 +105,38 @@ public class MainWindowViewModel : ViewModelBase
     #endregion
     public MainWindowViewModel()
     {
+        #region Commands
+
         ExitCommand = new Command(OnExitCommand,CanExitCommand);
         ChangeTabIndex = new Command(OnChangeTabIndexCommandExecuted, CanChangeTabIndex);
+
+        #endregion
+
+        #region Gropus
+
+        var student = 1;
+        var students = Enumerable.Range(1, 10).Select(s => new Students
+        {
+            Name = $"Name {student}",
+            Surname = $"Surname {student}",
+            Patronymic = $"patronymic {student}",
+            Birthday = DateTime.Now,
+            Rating = new Random().NextDouble(),
+            Description = $"student {student++} description"
+        });
+        
+        var groups = Enumerable.Range(1, 20).Select(g => new Group
+        {
+            Name = $"Group {g}",
+            StudentsCount = new ObservableCollection<Students>(students)
+        });
+        Groups = new ObservableCollection<Group>(groups);
+        
+        
+        
+
+        #endregion
+        
         var dataPoints = new List<DataPoints>((int)(360 / 0.5));
         for (var x = 0d; x <= 360; x+= .1)
         {
