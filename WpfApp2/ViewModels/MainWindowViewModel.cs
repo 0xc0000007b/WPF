@@ -49,7 +49,7 @@ public class MainWindowViewModel : ViewModelBase
     
     #endregion
 
-    #region GrupCollection
+    #region GroupCollection
 
     public ObservableCollection<Group> Groups { get; set; }
 
@@ -90,7 +90,41 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         private bool CanChangeTabIndex(object e) => true;
-   
+
+        #region Add Or delete group from list
+
+        public ICommand CreateNewGroupCommand { get; }
+
+
+        private void OnCreateNewGroupCommand(object e)
+        {
+            var maxGroupCount = Groups.Count + 1;
+            var newGroup = new Group
+            {
+                Name = $"group {maxGroupCount}",
+                Students = new ObservableCollection<Students>()
+            };
+            Groups.Add(newGroup);
+        }
+
+        private bool CanCreateNewGroupCommand(object e) => true;
+
+
+        public ICommand DeleteGroupCommand { get; }
+
+        private void OnDeleteGroupCommand(object e)
+        {
+            if (!(e is Group group)) return;
+            var index = Groups.IndexOf(group);
+            Groups.Remove(group);
+            if (index < Groups.Count) SelectedGroup = Groups[index];
+           
+        }
+
+        private bool CanDeleteGroupCommand(object e) => e is Group group  && Groups.Contains(group);
+        
+
+        #endregion
     #endregion
     
     public ICommand ExitCommand { get; }
@@ -103,12 +137,29 @@ public class MainWindowViewModel : ViewModelBase
     private bool CanExitCommand(object e) => true;
 
     #endregion
+
+    #region SomeCollections
+
+    public object[] SomeTypesCollection { get; set; }
+    private object _selectCollectionValue;
+
+    public object SelectedCollectionValue
+    {
+        get => _selectCollectionValue;
+
+        set => SetField(ref _selectCollectionValue, value);
+    }
+
+    #endregion
+    
     public MainWindowViewModel()
     {
         #region Commands
 
         ExitCommand = new Command(OnExitCommand,CanExitCommand);
         ChangeTabIndex = new Command(OnChangeTabIndexCommandExecuted, CanChangeTabIndex);
+        CreateNewGroupCommand = new Command(OnCreateNewGroupCommand, CanCreateNewGroupCommand);
+        DeleteGroupCommand = new Command(OnDeleteGroupCommand, CanDeleteGroupCommand);
 
         #endregion
 
@@ -128,7 +179,7 @@ public class MainWindowViewModel : ViewModelBase
         var groups = Enumerable.Range(1, 20).Select(g => new Group
         {
             Name = $"Group {g}",
-            StudentsCount = new ObservableCollection<Students>(students)
+            Students = new ObservableCollection<Students>(students)
         });
         Groups = new ObservableCollection<Group>(groups);
         
@@ -136,17 +187,37 @@ public class MainWindowViewModel : ViewModelBase
         
 
         #endregion
-        
+
+        #region Data Types
+
         var dataPoints = new List<DataPoints>((int)(360 / 0.5));
         for (var x = 0d; x <= 360; x+= .1)
         {
             const double rad = Math.PI / 100; 
             var y = Math.Sin( x  * rad);
             
-        dataPoints.Add(new DataPoints{XValue = x, YValue = y});
+            dataPoints.Add(new DataPoints{XValue = x, YValue = y});
         }
 
         _testData = dataPoints;
 
+        #endregion
+
+        #region SomeTypesCollection
+
+        var dataList = new List<object>();
+       
+        
+        dataList.Add("g");
+        dataList.Add(33);
+        var group = Groups[2];
+        dataList.Add(group);
+        
+        dataList.Add(group.Students[0]);
+
+        SomeTypesCollection = dataList.ToArray();
+        #endregion
+        
+        
     }
 }

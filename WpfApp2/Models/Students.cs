@@ -21,6 +21,6 @@ public class Group
 {
     public string Name { get; set; }
 
-    public ICollection<Students> StudentsCount { get; set; }
+    public IList<Students> Students { get; set; }
     
 }

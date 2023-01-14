@@ -9,7 +9,8 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WpfApp2.ViewModels"
         xmlns:m="clr-namespace:WpfApp2.Models"
-       
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -116,6 +117,8 @@
     </Style>
         <Style TargetType="fa:ImageAwesome" x:Key="FaStyle">
             <Setter Property="Foreground" Value="#9b59b6"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="#8e40aa"/>
@@ -229,29 +232,56 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Groups">
-                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedGroup}"/>
+                        <DockPanel>
+                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0 3">
+                                <Button Content="Add" Command="{Binding CreateNewGroupCommand}" Margin="0 0 3 0"/>
+                                <Button Content="Delete" Command="{Binding DeleteGroupCommand}" Margin="0 0 3 0" CommandParameter="{Binding SelectedGroup}"/>
+                            </UniformGrid>
+                            <ListBox ItemsSource="{Binding Groups}"  SelectedItem="{Binding SelectedGroup}" >
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type m:Group}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Students.Count, StringFormat=[ Students: {0} ]}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
                     </GroupBox>
+                        
+                        
                     <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, StringFormat='Students of group {0}', FallbackValue='Students', TargetNullValue='Students'}">
                         <DataGrid 
-                            ItemsSource="{Binding SelectedGroup.StudentsCount}" 
+                            ItemsSource="{Binding SelectedGroup.Students}" 
                             AutoGenerateColumns="False" 
-                            IsReadOnly="True"
                             HorizontalGridLinesBrush="#9b59b6"
                             VerticalGridLinesBrush="{x:Null}"
-                            AlternatingRowBackground="#8e44ad">
+                            AlternatingRowBackground="#8e44ad"
+                            CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Surname" IsReadOnly="True" Binding="{Binding Surname}"/>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic}"/>
+                                <DataGridTextColumn Header="Surname" IsReadOnly="True" Binding="{Binding Surname}" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Patronymic" Binding="{Binding Surname}" IsReadOnly="True"/>
                                 <!-- <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/> -->
-                                <DataGridTemplateColumn Header="Birthday">
+                                <DataGridTemplateColumn Header="Birthday" >
+                                  <!-- <DataGridTemplateColumn.CellTemplate> -->
+                                  <!--     ~1~ <DataTemplate DataType="{x:Type m:Students}"> @1@ -->
+                                  <!--     ~1~    <DatePicker SelectedDate="{Binding Birthday}"/> @1@ -->
+                                  <!--     ~1~     @1@ -->
+                                  <!--     ~1~ </DataTemplate> @1@ -->
+                                  <!--      -->
+                                  <!-- </DataGridTemplateColumn.CellTemplate> -->
                                   <DataGridTemplateColumn.CellTemplate>
                                       <DataTemplate DataType="{x:Type m:Students}">
-                                         <DatePicker SelectedDate="{Binding Birthday}"/>
-                                         
-                                         
+                                          <TextBlock Text="{Binding Birthday, StringFormat='dd.MM.yyyy'}"/>
                                       </DataTemplate>
                                   </DataGridTemplateColumn.CellTemplate>
+                                  <DataGridTemplateColumn.CellEditingTemplate>
+                                      <DataTemplate DataType="{x:Type m:Students}">
+                                          <DatePicker SelectedDate="{Binding Birthday}"/>
+                                      </DataTemplate>
+                                  </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" />
                                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
@@ -262,7 +292,87 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Margin="0 0 10 0" Style="{StaticResource FaStyle}" Icon="Solid_Database"/>
+                        <TextBlock Margin="0 5 0 0" Text="Some Data" />
+                    </StackPanel>
+                </TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <TextBlock>Elements</TextBlock>
+                            </GroupBox.Header>
+                            <GroupBox.Resources>
+                                <DataTemplate DataType="{x:Type m:Group}">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate> 
+                                <DataTemplate DataType="{x:Type m:Students}">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate> 
+                                <DataTemplate DataType="{x:Type system:String}">
+                                    <TextBlock >
+                                     <Run Foreground="#8e44ad" FontWeight="Heavy">  String: </Run> <TextBlock Text="{Binding}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type system:Int32}">
+                                    <TextBlock >
+                                      <Run Foreground="#27ae60" FontWeight="Heavy" >Number:</Run>  <TextBlock Text="{Binding}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GroupBox.Resources>
+                            <ListBox ItemsSource="{Binding SomeTypesCollection}" SelectedItem="{Binding SelectedCollectionValue}">
+                               
+                            </ListBox>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1">
+                            <GroupBox.Header>
+                                <TextBlock Text="Choose Element" />
+                            </GroupBox.Header>
+                            <GroupBox.Resources>
+                                <DataTemplate DataType="{x:Type m:Group}">
+                                    <TextBlock HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               FontSize="22" Text="{Binding Name}"/>
+                                </DataTemplate> 
+                                <DataTemplate DataType="{x:Type m:Students}">
+                                    <TextBlock 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"
+                                        FontSize="22" 
+                                        Text="{Binding Name}"/>
+                                </DataTemplate> 
+                                <DataTemplate DataType="{x:Type system:String}">
+                                    <TextBlock
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"
+                                        FontSize="22">
+                                        
+                                        <Run Foreground="#8e44ad" FontWeight="Heavy">  String: </Run> <TextBlock
+                                       
+                                            Text="{Binding}"/>
+                                    </TextBlock>
+                                    
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type system:Int32}">
+                                    <TextBlock 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"
+                                        FontSize="22">
+                                        <Run FontSize="22" Foreground="#27ae60" FontWeight="Heavy" >Number:</Run>  <TextBlock 
+                                            Text="{Binding}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GroupBox.Resources>
+                            <ContentControl Content="{Binding SelectedCollectionValue}" />
+                        </GroupBox>
+                    </Grid>
+            </TabItem>
             <TabItem  Width="120" Header="Test 1"/>
             <TabItem  Width="120" Header="Test 1"/>
             <TabItem  Width="120" Header="Test 1"/>
