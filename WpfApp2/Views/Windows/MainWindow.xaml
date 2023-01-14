@@ -126,6 +126,23 @@
             </MenuItem>
             <MenuItem Header="About"/>
             <MenuItem Header="Help" />
+            <MenuItem Command="{Binding ChangeTabIndex}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <StackPanel>
+                        <fa:ImageAwesome Width="10" Icon="Solid_ArrowLeft"></fa:ImageAwesome>
+                      
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndex}" CommandParameter="+1">
+                <MenuItem.Header >
+                    <StackPanel>
+                        <fa:ImageAwesome Width="10" Icon="Solid_ArrowRight"></fa:ImageAwesome>
+                      
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+           <MenuItem Header="{Binding SelectedTabIndex, UpdateSourceTrigger=PropertyChanged}"></MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -134,7 +151,7 @@
             </StatusBarItem>
             <StatusBarItem>
                 
-            <ProgressBar Value="{Binding Name}" Width="120" Height="15" Margin="10 0 0 0">
+            <ProgressBar Value="{Binding SelectedTabIndex}" Width="120" Height="15" Margin="10 0 0 0">
                 <ProgressBar.Style>
                     <Style TargetType="ProgressBar">
                         <Setter Property="Foreground" Value="#2980b9"/>
@@ -149,7 +166,7 @@
             </StatusBarItem>
 
         </StatusBar>
-        <TabControl>
+        <TabControl SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Width="120">
                 <TabItem.Header >
                     <StackPanel Orientation="Horizontal">
@@ -192,6 +209,11 @@
             </TabItem>
               
             <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120" Header="Test 1"/>
+           
         </TabControl>
     </DockPanel>
 </Window>

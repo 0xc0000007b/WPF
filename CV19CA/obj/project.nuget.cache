@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "uM8mCUe4QdOSSlXr4ZSNqRigCzpCalhpxMM2WImfLQUFOqgIIUWbZPihcwnAciuj+hHn7F0LlVbS+Az4Dwq/2Q==",
+  "dgSpecHash": "nMQVNpzYT5qAXWQ6WA+CHj/jMedkO2PkRXDlFxnsm4aBEEaEY22k02ljBtxsZtgcjL9VtJC9AoZcvRVsoXzZRw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hackerman\\Desktop\\wpf\\WpfApp4\\CV19CA\\CV19CA.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.0\\microsoft.aspnetcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\7.0.0\\microsoft.netcore.app.crossgen2.win-x64.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

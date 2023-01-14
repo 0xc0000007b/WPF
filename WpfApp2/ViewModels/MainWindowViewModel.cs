@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
+using OxyPlot;
 using WpfApp2.Infrastructure.Commands;
 using WpfApp2.Models;
 using WpfApp2.ViewModels.Base;
@@ -25,6 +26,8 @@ public class MainWindowViewModel : ViewModelBase
     #endregion
     #region ViewProperties
 
+    
+    
     private string _name;
 
     public string Name
@@ -42,9 +45,34 @@ public class MainWindowViewModel : ViewModelBase
     }
     
     #endregion
+    
+    
 
     #region Commands
 
+    #region SelectedTabCount
+
+    private int _selectedTabIndex;
+
+    public int SelectedTabIndex
+    {
+        get => _selectedTabIndex;
+
+        set => SetField(ref _selectedTabIndex, value);
+    }
+
+        public ICommand ChangeTabIndex { get; }
+
+        private void OnChangeTabIndexCommandExecuted(object p)
+        {
+            if(p is null) return;
+            SelectedTabIndex +=Convert.ToInt32(p);
+        }
+
+        private bool CanChangeTabIndex(object e) => true;
+   
+    #endregion
+    
     public ICommand ExitCommand { get; }
 
     private void OnExitCommand(object e)
@@ -58,6 +86,7 @@ public class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel()
     {
         ExitCommand = new Command(OnExitCommand,CanExitCommand);
+        ChangeTabIndex = new Command(OnChangeTabIndexCommandExecuted, CanChangeTabIndex);
         var dataPoints = new List<DataPoints>((int)(360 / 0.5));
         for (var x = 0d; x <= 360; x+= .1)
         {

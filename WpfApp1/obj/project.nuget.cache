@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "S6efTVxWjBXHj60vx/1UrZ7F/xHvyE+A/2SdJYmGZOPeZCyQsJO4OUeRI+B4+X83OMUNaSsk1xLbb0viaU/VPg==",
+  "dgSpecHash": "9w+JSXjI0kFyHXPHK1Rycju6s5t7kWsdaRQfEnMD8mqYEqVxmzCG8noi9fxp+KTFz+m4sxXKIVcPFfAc5aQjDA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hackerman\\Desktop\\wpf\\WpfApp4\\WpfApp1\\WpfApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hackerman\\.nuget\\packages\\fontawesome5\\2.1.11\\fontawesome5.2.1.11.nupkg.sha512",
     "C:\\Users\\Hackerman\\.nuget\\packages\\materialdesigncolors\\2.1.0\\materialdesigncolors.2.1.0.nupkg.sha512",
     "C:\\Users\\Hackerman\\.nuget\\packages\\materialdesignthemes\\4.7.0\\materialdesignthemes.4.7.0.nupkg.sha512",
-    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.0\\microsoft.aspnetcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\Hackerman\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\7.0.0\\microsoft.netcore.app.crossgen2.win-x64.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
