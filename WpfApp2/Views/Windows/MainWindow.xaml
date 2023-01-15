@@ -234,8 +234,11 @@
                     <GroupBox Header="Groups">
                         <DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0 3">
-                                <Button Content="Add" Command="{Binding CreateNewGroupCommand}" Margin="0 0 3 0"/>
-                                <Button Content="Delete" Command="{Binding DeleteGroupCommand}" Margin="0 0 3 0" CommandParameter="{Binding SelectedGroup}"/>
+                                <Button Content="Add"  Command="{Binding CreateNewGroupCommand}" Style="{StaticResource AddingButton}">
+
+                                   
+                                </Button>
+                                <Button Content="Delete" Command="{Binding DeleteGroupCommand}"  Style="{StaticResource DangerBtn}" CommandParameter="{Binding SelectedGroup}" />
                             </UniformGrid>
                             <ListBox ItemsSource="{Binding Groups}"  SelectedItem="{Binding SelectedGroup}" >
                                 <ListBox.ItemTemplate>
@@ -249,8 +252,7 @@
                             </ListBox>
                         </DockPanel>
                     </GroupBox>
-                        
-                        
+                    
                     <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, StringFormat='Students of group {0}', FallbackValue='Students', TargetNullValue='Students'}">
                         <DataGrid 
                             ItemsSource="{Binding SelectedGroup.Students}" 
@@ -309,71 +311,36 @@
                                 <TextBlock>Elements</TextBlock>
                             </GroupBox.Header>
                             <GroupBox.Resources>
-                                <DataTemplate DataType="{x:Type m:Group}">
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate> 
-                                <DataTemplate DataType="{x:Type m:Students}">
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate> 
-                                <DataTemplate DataType="{x:Type system:String}">
-                                    <TextBlock >
-                                     <Run Foreground="#8e44ad" FontWeight="Heavy">  String: </Run> <TextBlock Text="{Binding}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type system:Int32}">
-                                    <TextBlock >
-                                      <Run Foreground="#27ae60" FontWeight="Heavy" >Number:</Run>  <TextBlock Text="{Binding}"/>
-                                    </TextBlock>
-                                </DataTemplate>
+                               <ResourceDictionary>
+                                   <ResourceDictionary.MergedDictionaries>
+                                       <ResourceDictionary Source="../../Resources/DataTemplates/SomeItemsDataTemplates.xaml"></ResourceDictionary>
+                                   </ResourceDictionary.MergedDictionaries>
+                               </ResourceDictionary>
                             </GroupBox.Resources>
-                            <ListBox ItemsSource="{Binding SomeTypesCollection}" SelectedItem="{Binding SelectedCollectionValue}">
-                               
-                            </ListBox>
+                            <ListBox
+                                ItemsSource="{Binding 
+                                SomeTypesCollection}"
+                                     SelectedItem="{Binding 
+                                     SelectedCollectionValue}"/>
                         </GroupBox>
                         <GroupBox Grid.Column="1">
                             <GroupBox.Header>
                                 <TextBlock Text="Choose Element" />
                             </GroupBox.Header>
                             <GroupBox.Resources>
-                                <DataTemplate DataType="{x:Type m:Group}">
-                                    <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               FontSize="22" Text="{Binding Name}"/>
-                                </DataTemplate> 
-                                <DataTemplate DataType="{x:Type m:Students}">
-                                    <TextBlock 
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"
-                                        FontSize="22" 
-                                        Text="{Binding Name}"/>
-                                </DataTemplate> 
-                                <DataTemplate DataType="{x:Type system:String}">
-                                    <TextBlock
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"
-                                        FontSize="22">
-                                        
-                                        <Run Foreground="#8e44ad" FontWeight="Heavy">  String: </Run> <TextBlock
-                                       
-                                            Text="{Binding}"/>
-                                    </TextBlock>
-                                    
-                                </DataTemplate>
-                                <DataTemplate DataType="{x:Type system:Int32}">
-                                    <TextBlock 
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"
-                                        FontSize="22">
-                                        <Run FontSize="22" Foreground="#27ae60" FontWeight="Heavy" >Number:</Run>  <TextBlock 
-                                            Text="{Binding}"/>
-                                    </TextBlock>
-                                </DataTemplate>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="../../Resources/DataTemplates/DataTemplate.xaml"></ResourceDictionary>
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
                             </GroupBox.Resources>
                             <ContentControl Content="{Binding SelectedCollectionValue}" />
                         </GroupBox>
                     </Grid>
             </TabItem>
-            <TabItem  Width="120" Header="Test 1"/>
+            <TabItem  Width="120" Header="Test 1" >
+                
+            </TabItem>
             <TabItem  Width="120" Header="Test 1"/>
             <TabItem  Width="120" Header="Test 1"/>
            

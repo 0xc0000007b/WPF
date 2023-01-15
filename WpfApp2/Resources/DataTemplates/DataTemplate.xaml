@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="clr-namespace:WpfApp2.Models"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <DataTemplate DataType="{x:Type m:Group}">
+                                    <TextBlock HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               FontSize="22" Text="{Binding Name}"/>
+    </DataTemplate> 
+    <DataTemplate DataType="{x:Type m:Students}">
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontSize="22" 
+            Text="{Binding Name}"/>
+    </DataTemplate> 
+    <DataTemplate DataType="{x:Type system:String}">
+        <TextBlock
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontSize="22">
+            
+            <Run Foreground="#8e44ad" FontWeight="Heavy">  String: </Run> <TextBlock
+           
+                Text="{Binding}"/>
+        </TextBlock>
+        
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type system:Int32}">
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontSize="22">
+            <Run FontSize="22" Foreground="#27ae60" FontWeight="Heavy" >Number:</Run>  <TextBlock 
+                Text="{Binding}"/>
+        </TextBlock>
+    </DataTemplate>
+</ResourceDictionary>

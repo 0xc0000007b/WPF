@@ -219,7 +219,8 @@
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
       "FontAwesome5 >= 2.1.11",
-      "MaterialDesignThemes >= 4.7.0"
+      "MaterialDesignThemes >= 4.7.0",
+      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.39"
     ]
   },
   "packageFolders": {
@@ -235,12 +236,14 @@
       "outputPath": "C:\\Users\\Hackerman\\Desktop\\wpf\\WpfApp4\\WpfApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Hackerman\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Hackerman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -266,6 +269,10 @@
           "MaterialDesignThemes": {
             "target": "Package",
             "version": "[4.7.0, )"
+          },
+          "Microsoft.Xaml.Behaviors.Wpf": {
+            "target": "Package",
+            "version": "[1.1.39, )"
           }
         },
         "imports": [
