@@ -312,6 +312,64 @@
                 </Grid>
             </TabItem   >
             
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="FIle system" Margin="0 5"/>
+                        <fa:ImageAwesome Icon="Regular_File" Margin="5 0 10 0 " Width="20" Style="{StaticResource FaStyle}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox>
+                        <GroupBox.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}" ItemsSource="{Binding DirectoryItems}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:ImageAwesome Icon="Regular_Folder" Style="{StaticResource FaStyle}" Width="20" Margin="5 0 6 0"/>
+                                    <TextBlock Text="{Binding Name}" Margin="0 7"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type vm:FileViewModels}">
+                                    <StackPanel Orientation="Horizontal" ToolTip="{Binding Path}">
+                                        <fa:ImageAwesome Icon="Regular_File" Style="{StaticResource FaStyle}" Width="12" Margin="5 0 6 0"/>
+                                        <TextBlock Text="{Binding Name}"  Margin="0 7"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                        </GroupBox.Resources>
+                        <GroupBox.Header>
+                            <StackPanel>
+                                <fa:ImageAwesome Icon="Regular_Folder" Margin="5 0 10 0" Width="20" Style="{StaticResource FaStyle}"/>
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <!-- <ListBox ItemsSource="{Binding DirectoryInfo.DirectoryItems}" -->
+                        <!--          SelectedItem="{Binding SelectedDir}" -->
+                        <!--          SelectedIndex="0"> -->
+                        <!--     <ListBox.ItemTemplate> -->
+                        <!--         <DataTemplate DataType="{x:Type vm:DirectoryViewModel}"> -->
+                        <!--             <TextBlock Text="{Binding Name}" ToolTip="{Binding Path}"></TextBlock> -->
+                        <!--         </DataTemplate> -->
+                        <!--     </ListBox.ItemTemplate> -->
+                        <!-- </ListBox> -->
+                        <TreeView ItemsSource="{Binding DirectoryInfo.DirectoryItems}">
+
+                        </TreeView>
+                    </GroupBox>
+                    <!-- <GroupBox Grid.Column="1"> -->
+                    <!--     <GroupBox.Resources> -->
+                    <!--          -->
+                    <!--     </GroupBox.Resources> -->
+                    <!--     <GroupBox.Header> -->
+                    <!--         <StackPanel> -->
+                    <!--             <fa:ImageAwesome Icon="Regular_File" Margin="5 0 10 0" Width="20" Style="{StaticResource FaStyle}"/> -->
+                    <!--         </StackPanel> -->
+                    <!--     </GroupBox.Header> -->
+                    <!--     <ListBox SelectedItem="{Binding SelectedDir.Files, Mode=OneWay}"/> -->
+                    <!-- </GroupBox> -->
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

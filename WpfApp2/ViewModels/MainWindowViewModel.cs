@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using OxyPlot;
 using WpfApp2.Infrastructure.Commands;
@@ -31,7 +33,7 @@ public class MainWindowViewModel : ViewModelBase
 
     
     
-    private string _name;
+    private string _name; 
 
     public string Name
     {
@@ -61,7 +63,12 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _selectedGroup;
 
-        set => SetField(ref _selectedGroup, value);
+        set
+        {
+            if (!SetField(ref _selectedGroup,value))return;
+            _collectionViewStudents.Source = value?.Students;
+            OnPropertyChanged(nameof(SelectedGroupStudents));
+        }
     }
 
     #endregion
@@ -152,6 +159,79 @@ public class MainWindowViewModel : ViewModelBase
 
     #endregion
     
+    #region Selected Student View
+
+
+    private string _studentsFiltertext;
+
+    public string StudentFilterText
+    {
+        get => _studentsFiltertext;
+
+        set
+        {
+            if(!SetField(ref _studentsFiltertext, value)) return;
+            _collectionViewStudents.View.Refresh();
+            
+        }
+    }
+
+    private readonly CollectionViewSource _collectionViewStudents = new CollectionViewSource();
+    
+    public ICollectionView SelectedGroupStudents => _collectionViewStudents?.View;
+    
+    
+    
+    private void OnStuderntsFilter(object sender, FilterEventArgs e)
+    {
+        
+        if(!(e.Item is Students student))
+        {
+            e.Accepted = false;
+            return;
+        }
+        var textFilter = _studentsFiltertext;
+        if (string.IsNullOrWhiteSpace(textFilter))return;
+        if (student.Name is null || student.Surname is null || student.Patronymic is null)
+        {
+            e.Accepted = false;
+            return;
+        }
+
+        if (student.Name.Contains(textFilter, StringComparison.OrdinalIgnoreCase) || student.Surname.Contains(textFilter, StringComparison.OrdinalIgnoreCase) || student.Patronymic.Contains(textFilter, StringComparison.OrdinalIgnoreCase))return;
+        e.Accepted = false;
+
+    }
+
+   
+    
+    #endregion
+
+    #region Some crap
+
+    public IEnumerable<Students> Students =>  
+        Enumerable.Range(0,App.IsDesignMode ? 10 : 10000).Select(i => new Students
+        {
+            Name = $"{i}",
+            Surname = $"{i}"
+        });
+
+    #endregion
+
+    #region Directory Information
+
+    public DirectoryViewModel DirectoryInfo { get; } = new DirectoryViewModel("C:\\");
+
+    private DirectoryViewModel _selectedDir;
+
+    public DirectoryViewModel SelectedDir
+    {
+        get => _selectedDir;
+
+        set => SetField(ref _selectedDir, value);
+    }
+
+    #endregion
     public MainWindowViewModel()
     {
         #region Commands
@@ -218,7 +298,13 @@ public class MainWindowViewModel : ViewModelBase
 
         SomeTypesCollection = dataList.ToArray();
         #endregion
+
+       
         
         
+        _collectionViewStudents.Filter += OnStuderntsFilter;
+       // _collectionViewStudents.SortDescriptions.Add(new SortDescription("Surname", ListSortDirection.Descending));
     }
+
+   
 }
