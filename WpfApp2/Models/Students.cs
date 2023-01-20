@@ -22,5 +22,5 @@ public class Group
     public string Name { get; set; }
 
     public IList<Students> Students { get; set; }
-    
+    public string Description { get; set; }
 }

@@ -10,7 +10,6 @@
         xmlns:vm="clr-namespace:WpfApp2.ViewModels"
         xmlns:m="clr-namespace:WpfApp2.Models"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
-
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -33,7 +32,7 @@
                           Fill="#9b59b6" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Orange"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="#9b59b6"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="Ellipse" Property="Fill" Value="Gray"/>
@@ -64,7 +63,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border SnapsToDevicePixels="True" Background="Green"  BorderThickness="1" BorderBrush="YellowGreen" Height="3"/>
+                        <Border SnapsToDevicePixels="True" Background="#9b59b6"  BorderThickness="1" BorderBrush="#9b59b6" Height="3"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -76,7 +75,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Ellipse Height="10" Width="10" Fill="Green"></Ellipse>
+                        <Ellipse Height="10" Width="10" Fill="#9b59b6"></Ellipse>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -133,9 +132,7 @@
     <DockPanel>
         <Menu  DockPanel.Dock="Top">
             <MenuItem   Header="File">
-               
                 <MenuItem Command="{Binding ExitCommand}">
-
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Width="13" Height="13" Margin="0 0 10 0" Style="{StaticResource FaStyle}" Icon="Solid_FireExtinguisher"/>
@@ -233,14 +230,27 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Groups">
                         <DockPanel>
-                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0 3">
-                                <Button Content="Add"  Command="{Binding CreateNewGroupCommand}" Style="{StaticResource AddingButton}">
-
+                            <DockPanel.Resources>
+                                <CollectionViewSource 
+                                    Source="{Binding 
+                                    Groups}"
                                    
-                                </Button>
+                                    
+                                    x:Key="GroupsCollection"
+                                    Filter="GroupCollection_OnFilter"
+                                    />
+                                
+                            </DockPanel.Resources>
+                            <DockPanel Margin="0 5" Dock="Top">
+                                
+                                <fa:ImageAwesome Icon="Solid_Search" Width="20" Margin=" 10  0" Style="{StaticResource FaStyle}"/>
+                                <TextBox x:Name="FilterBox" TextChanged="OnGroupFilterTextChanged"/>
+                            </DockPanel >
+                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0 3">
+                                <Button Content="Add"  Command="{Binding CreateNewGroupCommand}" Style="{StaticResource AddingButton}"/>
                                 <Button Content="Delete" Command="{Binding DeleteGroupCommand}"  Style="{StaticResource DangerBtn}" CommandParameter="{Binding SelectedGroup}" />
                             </UniformGrid>
-                            <ListBox ItemsSource="{Binding Groups}"  SelectedItem="{Binding SelectedGroup}" >
+                            <ListBox ItemsSource="{Binding Source={StaticResource GroupsCollection}}"  SelectedItem="{Binding SelectedGroup}" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="{x:Type m:Group}">
                                         <StackPanel Orientation="Horizontal">
@@ -254,7 +264,13 @@
                     </GroupBox>
                     
                     <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, StringFormat='Students of group {0}', FallbackValue='Students', TargetNullValue='Students'}">
-                        <DataGrid 
+                        <DockPanel>
+                           
+                            <DockPanel Dock="Top" Margin="0,5">
+                                <fa:ImageAwesome Icon="Solid_Search" Width="20" Margin=" 10  0" Style="{StaticResource FaStyle}"/>
+                                <TextBox/>
+                            </DockPanel >
+                            <DataGrid 
                             ItemsSource="{Binding SelectedGroup.Students}" 
                             AutoGenerateColumns="False" 
                             HorizontalGridLinesBrush="#9b59b6"
@@ -291,59 +307,11 @@
                                 
                             </DataGrid.Columns>
                         </DataGrid>
+                        </DockPanel>
                     </GroupBox>
                 </Grid>
-            </TabItem>
-            <TabItem  Width="120">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Margin="0 0 10 0" Style="{StaticResource FaStyle}" Icon="Solid_Database"/>
-                        <TextBlock Margin="0 5 0 0" Text="Some Data" />
-                    </StackPanel>
-                </TabItem.Header>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <GroupBox>
-                            <GroupBox.Header>
-                                <TextBlock>Elements</TextBlock>
-                            </GroupBox.Header>
-                            <GroupBox.Resources>
-                               <ResourceDictionary>
-                                   <ResourceDictionary.MergedDictionaries>
-                                       <ResourceDictionary Source="../../Resources/DataTemplates/SomeItemsDataTemplates.xaml"></ResourceDictionary>
-                                   </ResourceDictionary.MergedDictionaries>
-                               </ResourceDictionary>
-                            </GroupBox.Resources>
-                            <ListBox
-                                ItemsSource="{Binding 
-                                SomeTypesCollection}"
-                                     SelectedItem="{Binding 
-                                     SelectedCollectionValue}"/>
-                        </GroupBox>
-                        <GroupBox Grid.Column="1">
-                            <GroupBox.Header>
-                                <TextBlock Text="Choose Element" />
-                            </GroupBox.Header>
-                            <GroupBox.Resources>
-                                <ResourceDictionary>
-                                    <ResourceDictionary.MergedDictionaries>
-                                        <ResourceDictionary Source="../../Resources/DataTemplates/DataTemplate.xaml"></ResourceDictionary>
-                                    </ResourceDictionary.MergedDictionaries>
-                                </ResourceDictionary>
-                            </GroupBox.Resources>
-                            <ContentControl Content="{Binding SelectedCollectionValue}" />
-                        </GroupBox>
-                    </Grid>
-            </TabItem>
-            <TabItem  Width="120" Header="Test 1" >
-                
-            </TabItem>
-            <TabItem  Width="120" Header="Test 1"/>
-            <TabItem  Width="120" Header="Test 1"/>
-           
+            </TabItem   >
+            
         </TabControl>
     </DockPanel>
 </Window>

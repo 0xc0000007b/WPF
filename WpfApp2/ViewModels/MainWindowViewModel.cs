@@ -179,7 +179,8 @@ public class MainWindowViewModel : ViewModelBase
         var groups = Enumerable.Range(1, 20).Select(g => new Group
         {
             Name = $"Group {g}",
-            Students = new ObservableCollection<Students>(students)
+            Students = new ObservableCollection<Students>(students),
+            Description = $"group {g}"
         });
         Groups = new ObservableCollection<Group>(groups);
         
