@@ -31,7 +31,7 @@ public class DataService
        {
            var line =  reader.ReadLine();
            if (string.IsNullOrWhiteSpace(line)) ;
-           yield return line.Replace("Korea", "Korea - ");
+           yield return line.Replace("Korea", "Korea - ").Replace("Bonaire,","Bonaire - ");
        }
     
    }
