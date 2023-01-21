@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:WpfApp2.Views.Controlls"
              xmlns:vm="clr-namespace:WpfApp2.ViewModels"
              xmlns:fs="http://schemas.fontawesome.com/icons/"
+             xmlns:c="clr-namespace:WpfApp2.Models"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance vm:StatisticsViewModel, IsDesignTimeCreatable=True}">
@@ -36,8 +37,36 @@
                 </StackPanel>
             </GroupBox.Header>
            <DockPanel>
-               <Button Style="{StaticResource AddingButton}" Width="100" Height="20" DockPanel.Dock="Bottom" Margin="0, 5" Command="{Binding RefreshStatistics}"/>
-               <ListBox ItemsSource="{Binding Countries}" DisplayMemberPath="Name"/>
+               <Button Style="{StaticResource ButtonBase}" Width="150" Height="20" DockPanel.Dock="Bottom" Margin="0, 5" Command="{Binding RefreshStatistics}">
+                   <StackPanel Orientation="Horizontal">
+                       <fs:ImageAwesome HorizontalAlignment="Left" Width="15" Icon="Solid_ArrowDown">
+                           <fs:ImageAwesome.Style>
+                               <Style TargetType="fs:ImageAwesome">
+                                   <Setter Property="Foreground" Value="White"/>
+                                   <Style.Triggers>
+                                       <Trigger Property="IsMouseOver" Value="True">
+                                           <Setter Property="Foreground" Value="#9b59b6"/>
+                                       </Trigger>
+                                   </Style.Triggers>
+                               </Style>
+                           </fs:ImageAwesome.Style>
+                       </fs:ImageAwesome>
+                       <TextBlock Text="Download countries" Margin="10 0 5 0"/>
+                   </StackPanel>
+               </Button>
+               <ListBox
+                   ItemsSource="{Binding Countries}"
+                   DisplayMemberPath="Name"
+                   SelectedItem="{Binding SelectedCountry}">
+                   <ListBox.ItemTemplate>
+                       <DataTemplate DataType="{x:Type c:Country}">
+                           <TextBlock>
+                               <TextBlock Text="{Binding Name}"/>
+                               <TextBlock Text="{Binding Location}"/>
+                           </TextBlock>
+                       </DataTemplate>
+                   </ListBox.ItemTemplate>
+               </ListBox>
            </DockPanel>
         </GroupBox>
         <GroupBox Grid.Column="1">
@@ -47,6 +76,13 @@
                    <TextBlock Text="info" Margin="10,7"></TextBlock>
                 </StackPanel>
             </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="100"/>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>

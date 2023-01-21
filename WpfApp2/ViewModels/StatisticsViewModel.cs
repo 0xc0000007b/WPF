@@ -14,7 +14,7 @@ namespace WpfApp2.ViewModels;
 public class StatisticsViewModel : ViewModelBase
 {
 
-    private DataService _dataService;
+    private readonly DataService _dataService;
     private  MainWindowViewModel _mainWindowViewModel { get; }
 
     #region Commands
@@ -30,6 +30,23 @@ public class StatisticsViewModel : ViewModelBase
 
     #endregion
 
+    #region Country Selection
+
+    private Country _selectedCountry;
+
+    public Country  SelectedCountry
+    {
+        get => _selectedCountry;
+
+        set => SetField(ref _selectedCountry, value);
+    }
+    
+
+    #endregion
+
+
+    #region getting countries
+
     private IEnumerable<Country> _countries;
 
     public IEnumerable<Country> Countries
@@ -38,7 +55,9 @@ public class StatisticsViewModel : ViewModelBase
 
         private set => SetField(ref _countries, value);
     }
+    
 
+    #endregion
     /// <summary>
     /// Debug constructor for designer
     /// </summary>
