@@ -145,20 +145,6 @@ public class MainWindowViewModel : ViewModelBase
 
     #endregion
 
-    #region SomeCollections
-
-    public object[] SomeTypesCollection { get; set; }
-    private object _selectCollectionValue;
-
-    public object SelectedCollectionValue
-    {
-        get => _selectCollectionValue;
-
-        set => SetField(ref _selectCollectionValue, value);
-    }
-
-    #endregion
-    
     #region Selected Student View
 
 
@@ -218,20 +204,13 @@ public class MainWindowViewModel : ViewModelBase
 
     #endregion
 
-    #region Directory Information
+    #region Statistics
 
-    public DirectoryViewModel DirectoryInfo { get; } = new DirectoryViewModel("C:\\");
-
-    private DirectoryViewModel _selectedDir;
-
-    public DirectoryViewModel SelectedDir
-    {
-        get => _selectedDir;
-
-        set => SetField(ref _selectedDir, value);
-    }
+    private readonly StatisticsViewModel _countryStatistic;
+    
 
     #endregion
+    
     public MainWindowViewModel()
     {
         #region Commands
@@ -284,21 +263,12 @@ public class MainWindowViewModel : ViewModelBase
 
         #endregion
 
-        #region SomeTypesCollection
 
-        var dataList = new List<object>();
-       
-        
-        dataList.Add("g");
-        dataList.Add(33);
-        var group = Groups[2];
-        dataList.Add(group);
-        
-        dataList.Add(group.Students[0]);
+        #region Country statistic
 
-        SomeTypesCollection = dataList.ToArray();
+        _countryStatistic = new StatisticsViewModel(this);
+
         #endregion
-
        
         
         

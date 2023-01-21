@@ -20,8 +20,7 @@ namespace WpfApp2
             IsDesignMode = false;
             base.OnStartup(e);
 
-            var dataService = new DataService();
-            var data = dataService.GetData().ToArray();
+           
         }
     }
 }

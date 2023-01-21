@@ -4,9 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using WpfApp2.Models;
+using Point = System.Drawing.Point;
 
 namespace WpfApp2.Services;
 
@@ -24,8 +26,8 @@ public class DataService
    
    static   IEnumerable<string> GetDataString()
    {
-       using var stream_data =  GetStreamData().Result;
-       using var reader = new StreamReader(stream_data);
+       using var streamData = (SynchronizationContext.Current is null ? GetStreamData() : Task.Run(GetStreamData)).Result;
+       using var reader = new StreamReader(streamData);
 
        while (!reader.EndOfStream)
        {
@@ -44,14 +46,14 @@ public class DataService
    static IEnumerable<(string Country, string Province,(double longitude, double latitude) Place, string [] counts)> GetCountriesData()
    {
        var dataLines = GetDataString().Skip(1).Select(l => l.Split(','));
-       foreach (var line in dataLines)
+       foreach (var row in dataLines)
        {
-           var province = line[0].Trim();
-           var country = line[1].Trim(' ', '"');
-           var latitude = double.Parse(line[2]);
-           var longitude = double.Parse(line[2]);
-           var counts = line.Skip(4).ToArray();
-           yield return (country, province, (longitude, latitude), counts);
+           var province = row[0].Trim();
+           var countryName = row[1].Trim(' ', '"');
+           var latitude = double.Parse(row[2] ==""?"0":row[3], CultureInfo.InvariantCulture);
+           var longitude = double.Parse(row[4]==""?"0":row[4], CultureInfo.InvariantCulture);
+           var counts = row.Skip(4).ToArray();
+           yield return (countryName, province, (longitude, latitude), counts);
        }
    }
 
@@ -68,7 +70,7 @@ public class DataService
                 Province = country.Select(x => new PlaceInfo
                 {
                     Name = x.Province,
-                    Location = new Point(x.Place.latitude, x.Place.longitude),
+                    Location = new Point((int)x.Place.latitude, (int)x.Place.longitude),
                     Count = dates.Zip(x.counts, (date,count) => new ConfirmrdCounts{Date = date, Count = count})
                 })
            };
