@@ -206,7 +206,7 @@ public class MainWindowViewModel : ViewModelBase
 
     #region Statistics
 
-    private readonly StatisticsViewModel _countryStatistic;
+    public  StatisticsViewModel CountryStatistic { get; }
     
 
     #endregion
@@ -266,7 +266,7 @@ public class MainWindowViewModel : ViewModelBase
 
         #region Country statistic
 
-        _countryStatistic = new StatisticsViewModel(this);
+        CountryStatistic = new StatisticsViewModel(this);
 
         #endregion
        

@@ -317,7 +317,7 @@
                         <TextBlock Text="Countries" Margin="0,7"></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <views:CountriesView/>
+                <views:CountriesView DataContext="{Binding CountryStatistic}"/>
             </TabItem>
             
         </TabControl>

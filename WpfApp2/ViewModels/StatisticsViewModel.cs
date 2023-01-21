@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Input;
 using WpfApp2.Infrastructure.Commands;
 using WpfApp2.Models;
@@ -35,6 +38,30 @@ public class StatisticsViewModel : ViewModelBase
 
         private set => SetField(ref _countries, value);
     }
+
+    /// <summary>
+    /// Debug constructor for designer
+    /// </summary>
+    /// <exception cref="InvalidOperationException"></exception>
+    public StatisticsViewModel() : this(null)
+    {
+        if (App.IsDesignMode) throw new InvalidOperationException("only for MS VS od JB Rider Designer");
+        _countries = Enumerable.Range(1, 15).Select(c => new Country
+        {
+            Name = $"Name {c}",
+            Province = Enumerable.Range(1,10).Select(p => new PlaceInfo
+            {
+                Name = $"Province {p}",
+                Location = new Point(1, c),
+                Count = Enumerable.Range(1,10).Select(i => new ConfirmrdCounts
+                {
+                    Date = DateTime.Now.Subtract(TimeSpan.FromDays(150 - i)),
+                    Count = i.ToString()
+                }).ToArray()
+            }).ToArray()
+        }).ToArray();
+    }
+    
     
     public StatisticsViewModel(MainWindowViewModel mainWindowViewModel)
     {
