@@ -8,6 +8,7 @@
              xmlns:fs="http://schemas.fontawesome.com/icons/"
              xmlns:c="clr-namespace:WpfApp2.Models"
              xmlns:conv="clr-namespace:WpfApp2.Infrastructure.Converters"
+             xmlns:common="clr-namespace:WpfApp2.Infrastructure.Common"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance vm:StatisticsViewModel, IsDesignTimeCreatable=True}">
@@ -93,6 +94,7 @@
                         </conv:CompositeConverter.First>
                     </conv:CompositeConverter>
                     <conv:ToArray x:Key="ToArray"/>
+                    <common:StringToUppercase Str="vasya" x:Key="Uppercase"></common:StringToUppercase>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -107,17 +109,20 @@
                    <Slider Name="TestSlide3"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
                    <Slider Name="TestSlide4"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
                </StackPanel>
-                <ListBox Grid.Row="1">
-                    <ListBox.ItemsSource>
-                        <MultiBinding Converter="{StaticResource ToArray}">
-                            <Binding ElementName="TestSlide" Path="Value"/>
-                            <Binding ElementName="TestSlide1" Path="Value"/>
-                            <Binding ElementName="TestSlide2" Path="Value"/>
-                            <Binding ElementName="TestSlide3" Path="Value"/>
-                            <Binding ElementName="TestSlide4" Path="Value"/>
-                        </MultiBinding>
-                    </ListBox.ItemsSource>
-                </ListBox>
+              <Border Grid.Row="1">
+                  <ListBox Grid.Row="1" >
+                      <TextBlock Text="{Binding Converter={StaticResource Uppercase}}"></TextBlock>
+                      <!-- <ListBox.ItemsSource> -->
+                      <!--     <MultiBinding Converter="{StaticResource ToArray}"> -->
+                      <!--         <Binding ElementName="TestSlide" Path="Value"/> -->
+                      <!--         <Binding ElementName="TestSlide1" Path="Value"/> -->
+                      <!--         <Binding ElementName="TestSlide2" Path="Value"/> -->
+                      <!--         <Binding ElementName="TestSlide3" Path="Value"/> -->
+                      <!--         <Binding ElementName="TestSlide4" Path="Value"/> -->
+                      <!--     </MultiBinding> -->
+                      <!-- </ListBox.ItemsSource> -->
+                  </ListBox>
+              </Border>
                 <!-- <TextBlock Grid.Row="1"> -->
                 <!-- -->
                 <!--     <TextBlock.Text> -->
