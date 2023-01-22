@@ -25,6 +25,32 @@ public class Country : PlaceInfo
                 }
                 set => _location = value;
         }
+
         public IEnumerable<PlaceInfo> Province { get; set; }
 
+        private IEnumerable<ConfirmrdCounts> _counts;
+
+        public override IEnumerable<ConfirmrdCounts> Count
+        {
+                get
+                {
+                        if (_counts != null) return _counts;
+                        var pointsCount = Province.FirstOrDefault()?.Count?.Count() ?? 0;
+                        if (pointsCount == 0) return Enumerable.Empty<ConfirmrdCounts>();
+                        var points = new ConfirmrdCounts[pointsCount];
+                        var provincePoints = Province.Select(p => p.Count.ToArray()).ToArray();
+                        
+                        foreach (var province in provincePoints)
+                                for (var i = 0; i < pointsCount; i++)
+                                {
+                                        if (points[i].Date == default) points[i] = province[i];
+                                        else points[i].Count += province[i].Count;
+                                }
+
+                        return _counts = points;
+
+                }
+                
+                set => _counts = (ConfirmrdCounts[])value;
+        }
 }

@@ -71,7 +71,7 @@ public class DataService
                 {
                     Name = x.Province,
                     Location = new Point((int)x.Place.latitude, (int)x.Place.longitude),
-                    Count = dates.Zip(x.counts, (date,count) => new ConfirmrdCounts{Date = date, Count = count})
+                    Count = dates.Zip(x.counts, (date,count) => new ConfirmrdCounts{Date = date, Count = int.Parse(count)})
                 })
            };
            yield return c;

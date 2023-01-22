@@ -75,7 +75,7 @@ public class StatisticsViewModel : ViewModelBase
                 Count = Enumerable.Range(1,10).Select(i => new ConfirmrdCounts
                 {
                     Date = DateTime.Now.Subtract(TimeSpan.FromDays(150 - i)),
-                    Count = i.ToString()
+                    Count = i
                 }).ToArray()
             }).ToArray()
         }).ToArray();

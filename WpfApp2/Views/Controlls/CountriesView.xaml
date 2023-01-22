@@ -9,6 +9,7 @@
              xmlns:c="clr-namespace:WpfApp2.Models"
              xmlns:conv="clr-namespace:WpfApp2.Infrastructure.Converters"
              xmlns:common="clr-namespace:WpfApp2.Infrastructure.Common"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance vm:StatisticsViewModel, IsDesignTimeCreatable=True}">
@@ -102,39 +103,16 @@
                     
                 </Grid.RowDefinitions>
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="100"/>
-               <StackPanel >
-                   <Slider Name="TestSlide"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
-                   <Slider Name="TestSlide1"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
-                   <Slider Name="TestSlide2"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
-                   <Slider Name="TestSlide3"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
-                   <Slider Name="TestSlide4"  Maximum="50" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"/>
-               </StackPanel>
-              <Border Grid.Row="1">
-                  <ListBox Grid.Row="1" >
-                      <TextBlock Text="{Binding Converter={StaticResource Uppercase}}"></TextBlock>
-                      <!-- <ListBox.ItemsSource> -->
-                      <!--     <MultiBinding Converter="{StaticResource ToArray}"> -->
-                      <!--         <Binding ElementName="TestSlide" Path="Value"/> -->
-                      <!--         <Binding ElementName="TestSlide1" Path="Value"/> -->
-                      <!--         <Binding ElementName="TestSlide2" Path="Value"/> -->
-                      <!--         <Binding ElementName="TestSlide3" Path="Value"/> -->
-                      <!--         <Binding ElementName="TestSlide4" Path="Value"/> -->
-                      <!--     </MultiBinding> -->
-                      <!-- </ListBox.ItemsSource> -->
-                  </ListBox>
-              </Border>
-                <!-- <TextBlock Grid.Row="1"> -->
-                <!-- -->
-                <!--     <TextBlock.Text> -->
-                <!--         <MultiBinding Converter="{StaticResource ToArray}" StringFormat="{}{0}"> -->
-                <!--             <Binding ElementName="TestSlide" Path="Value" UpdateSourceTrigger="PropertyChanged"/> -->
-                <!--             <Binding ElementName="TestSlide1" Path="Value" UpdateSourceTrigger="PropertyChanged"/>  -->
-                <!--             <Binding ElementName="TestSlide2" Path="Value" UpdateSourceTrigger="PropertyChanged"/>  -->
-                <!--             <Binding ElementName="TestSlide3" Path="Value" UpdateSourceTrigger="PropertyChanged"/>  -->
-                <!--             <Binding ElementName="TestSlide4" Path="Value" UpdateSourceTrigger="PropertyChanged"/>  -->
-                <!--         </MultiBinding> -->
-                <!--     </TextBlock.Text> -->
-                <!-- </TextBlock> -->
+              <oxy:Plot>
+                  <oxy:Plot.Axes>
+                      <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid" MinorGridlineStyle="Dot" Title="Count" MajorGridlineColor="#9b59b6" MinorGridlineColor="#e67e22"/> 
+                      <oxy:DateTimeAxis Position="Bottom" Title="Time"  MajorGridlineStyle="Solid" MinorGridlineStyle="Dot" MajorGridlineColor="#9b59b6" MinorGridlineColor="#e67e22"/> 
+                  </oxy:Plot.Axes>
+                  <oxy:LineSeries StrokeThickness="1" Color="#8e44ad" ItemsSource="{Binding SelectedCountry.Count}"
+                                  DataFieldX="Date"
+                                  DataFieldY="Count"/>
+                  
+              </oxy:Plot>
             </Grid>
         </GroupBox>
     </Grid>

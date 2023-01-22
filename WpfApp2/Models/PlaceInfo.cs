@@ -9,8 +9,9 @@ public class PlaceInfo
 {
     public string Name { get; set; }
     public virtual Point Location { get; set; }
-    public IEnumerable<ConfirmrdCounts> Count { get; set; }
-   
+    public  virtual IEnumerable<ConfirmrdCounts> Count { get; set; }
+
+    public override string ToString() => $"{Name}({Location})";
 }
 
 
