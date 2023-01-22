@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace WpfApp2.Infrastructure.Converters;
 
@@ -24,4 +25,6 @@ public class CompositeConverter : Converter
         var firstBackRes = First?.ConvertBack(secondBackRes, targetType, parameter, culture) ?? secondBackRes;
         return firstBackRes;
     }
+
+    
 }

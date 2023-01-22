@@ -10,6 +10,7 @@
              xmlns:conv="clr-namespace:WpfApp2.Infrastructure.Converters"
              xmlns:common="clr-namespace:WpfApp2.Infrastructure.Common"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance vm:StatisticsViewModel, IsDesignTimeCreatable=True}">
@@ -113,7 +114,15 @@
                                   DataFieldY="Count"/>
                   
               </oxy:Plot>
+                <map:Map Grid.Row="1" ZoomLevel="5" MaxZoomLevel="20" Center="{Binding SelectedCountry.Location,Converter={conv:PointToMapLoc}}">
+                        <map:MapScale Opacity="1" Background="Transparent" VerticalAlignment="Bottom" Margin="5"/>
+                        <map:MapGraticule Opacity=".5" Background="Transparent"></map:MapGraticule>
+                    <map:Map.MapLayer>
+                        <map:MapTileLayer  TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"></map:MapTileLayer>
+                    </map:Map.MapLayer>
+                </map:Map>
             </Grid>
+            
         </GroupBox>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace WpfApp2.Infrastructure.Converters;
@@ -8,6 +9,8 @@ namespace WpfApp2.Infrastructure.Converters;
 /// Realize the Linear Covert
 /// </summary>
 
+[ValueConversion(typeof(double), typeof(double))] 
+[MarkupExtensionReturnType(typeof(Linear))]
 public class Linear : Converter
 {
     [ConstructorArgument("K")]
