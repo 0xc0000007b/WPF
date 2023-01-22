@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="WpfApp2.Views.Controlls.CountriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfApp2.Views.Controlls"
+             xmlns:vm="clr-namespace:WpfApp2.ViewModels"
+             xmlns:fs="http://schemas.fontawesome.com/icons/"
+             xmlns:c="clr-namespace:WpfApp2.Models"
+             xmlns:conv="clr-namespace:WpfApp2.Infrastructure.Converters"
+             xmlns:common="clr-namespace:WpfApp2.Infrastructure.Common"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance vm:StatisticsViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <Style TargetType="fs:ImageAwesome" x:Key="FaStyle">
+            <Setter Property="Foreground" Value="#9b59b6"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#8e40aa"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter/>
+        <GroupBox>
+
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <fs:ImageAwesome Icon="Regular_Flag" Style="{StaticResource FaStyle}"/>
+                    <TextBlock Text="Countries" Margin="10,7"/>
+                </StackPanel>
+            </GroupBox.Header>
+           <DockPanel>
+               <Button  Style="{StaticResource ButtonBase}" Width="150" Height="20" DockPanel.Dock="Bottom" Margin="0, 10 0 0" Command="{Binding RefreshStatistics}">
+                   <StackPanel Orientation="Horizontal">
+                       <fs:ImageAwesome HorizontalAlignment="Left" Width="15" Icon="Solid_ArrowDown">
+                           <fs:ImageAwesome.Style>
+                               <Style TargetType="fs:ImageAwesome">
+                                   <Setter Property="Foreground" Value="White"/>
+                                   <Style.Triggers>
+                                       <Trigger Property="IsMouseOver" Value="True">
+                                           <Setter Property="Foreground" Value="#9b59b6"/>
+                                       </Trigger>
+                                   </Style.Triggers>
+                               </Style>
+                           </fs:ImageAwesome.Style>
+                       </fs:ImageAwesome>
+                       <TextBlock Text="Download countries" Margin="10 0 5 0"/>
+                   </StackPanel>
+               </Button>
+               <ListBox
+                   ItemsSource="{Binding Countries}"
+                  
+                   SelectedItem="{Binding SelectedCountry}">
+                   <ListBox.ItemTemplate>
+                       <DataTemplate DataType="{x:Type c:Country}">
+                           <DataTemplate.Resources>
+                               <conv:LocationPointToStr x:Key="ToStr"/>
+                           </DataTemplate.Resources>
+                           <TextBlock>
+                               <TextBlock Text="{Binding Name}"/>
+                               <TextBlock Text="{Binding Location, Converter={StaticResource ToStr}}"/>
+                           </TextBlock>
+                       </DataTemplate>
+                   </ListBox.ItemTemplate>
+               </ListBox>
+           </DockPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <fs:ImageAwesome Icon="Solid_Info"  Style="{StaticResource FaStyle}"/>
+                   <TextBlock Text="info" Margin="10,7"></TextBlock>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.Resources>
+                    <conv:Multiply Coeff="4" x:Key="TestMult"/>
+                    <conv:Linear K="3" B="2" x:Key="LinearTest"/>
+                    <conv:CompositeConverter x:Key="TestComp">
+                        <conv:CompositeConverter.Second>
+                            <conv:Multiply Coeff="3"></conv:Multiply>
+                        </conv:CompositeConverter.Second>
+                        <conv:CompositeConverter.First>
+                            <conv:Linear K="10"/>
+                        </conv:CompositeConverter.First>
+                    </conv:CompositeConverter>
+                    <conv:ToArray x:Key="ToArray"/>
+                    <common:StringToUppercase Str="vasya" x:Key="Uppercase"></common:StringToUppercase>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    
+                </Grid.RowDefinitions>
+                <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="100"/>
+              <oxy:Plot>
+                  <oxy:Plot.Axes>
+                      <oxy:LinearAxis Position="Left"  MajorGridlineStyle="Solid" MinorGridlineStyle="Dot" Title="Count" MajorGridlineColor="#9b59b6" MinorGridlineColor="#e67e22"/> 
+                      <oxy:DateTimeAxis Position="Bottom" Title="Time"  MajorGridlineStyle="Solid" MinorGridlineStyle="Dot" MajorGridlineColor="#9b59b6" MinorGridlineColor="#e67e22"/> 
+                  </oxy:Plot.Axes>
+                  <oxy:LineSeries StrokeThickness="1" Color="#8e44ad" ItemsSource="{Binding SelectedCountry.Count}"
+                                  DataFieldX="Date"
+                                  DataFieldY="Count"/>
+                  
+              </oxy:Plot>
+                <map:Map Grid.Row="1" ZoomLevel="5" MaxZoomLevel="20" Center="{Binding SelectedCountry.Location,Converter={conv:PointToMapLoc}}">
+                        <map:MapScale Opacity="1" Background="Transparent" VerticalAlignment="Bottom" Margin="5"/>
+                        <map:MapGraticule Opacity=".5" Background="Transparent"></map:MapGraticule>
+                    <map:Map.MapLayer>
+                        <map:MapTileLayer  TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"></map:MapTileLayer>
+                    </map:Map.MapLayer>
+                </map:Map>
+            </Grid>
+            
+        </GroupBox>
+    </Grid>
+</UserControl>
