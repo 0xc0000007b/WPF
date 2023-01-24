@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\App.xaml
-1-834700163
+7360020935
 
-81207948851
-202929082456
-Views\Windows\MainWindow.xaml;
+25395046453
+2061131376944
+Resources\Base\Brushes.xaml;Resources\DataTemplates\DataTemplate.xaml;Resources\DataTemplates\SomeItemsDataTemplates.xaml;Resources\Styles\Buttons.xaml;Resources\Styles\GridSplitters.xaml;Views\Controlls\CountriesView.xaml;Views\Windows\MainWindow.xaml;
 
 False
 

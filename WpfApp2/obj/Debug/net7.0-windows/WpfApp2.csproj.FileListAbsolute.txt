@@ -25,3 +25,15 @@ C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\FontAwes
 C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\OxyPlot.dll
 C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\OxyPlot.Wpf.dll
 C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\WpfApp2.csproj.CopyComplete
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\System.Runtime.Caching.dll
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\MapControl.WPF.dll
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\System.Runtime.Caching.dll
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Resources\Base\Brushes.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Resources\Styles\Buttons.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Resources\Styles\GridSplitters.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Views\Controlls\CountriesView.g.cs
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\App.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Resources\DataTemplates\DataTemplate.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Resources\DataTemplates\SomeItemsDataTemplates.baml
+C:\Users\Hackerman\Desktop\wpf\WpfApp4\WpfApp2\obj\Debug\net7.0-windows\Views\Controlls\CountriesView.baml

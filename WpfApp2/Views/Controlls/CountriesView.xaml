@@ -67,6 +67,7 @@
                            <DataTemplate.Resources>
                                <conv:LocationPointToStr x:Key="ToStr"/>
                            </DataTemplate.Resources>
+                           
                            <TextBlock>
                                <TextBlock Text="{Binding Name}"/>
                                <TextBlock Text="{Binding Location, Converter={StaticResource ToStr}}"/>
